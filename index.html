@@ -153,14 +153,11 @@
 
 <section>
   <h2>Lucrări realizate</h2>
-  <p>Câteva imagini din lucrările noastre recente (fose septice, drenaj, săpături):</p>
-  <div class="galerie">
-    <img src="poze/lucrare1.jpg" alt="Montaj fosa septica">
-    <img src="poze/lucrare2.jpg" alt="Sapat sant utilitati">
-    <img src="poze/lucrare3.jpg" alt="Fosa septica montata">
-    <img src="poze/lucrare4.jpg" alt="Drenaj fosa">
-    <img src="poze/lucrare5.jpg" alt="Lucrari mini excavator">
-  </div>
+
+<div style="max-width:400px; margin:auto;">
+  <img id="slider" src="poze/lucrare1.jpg" style="width:100%; border-radius:8px;">
+</div>
+
 </section>
 
 <section class="preturi">
@@ -209,6 +206,22 @@
 <a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank">
   WhatsApp
 </a>
+<script>
+  const imagini = [
+    "poze/lucrare1.jpg",
+    "poze/lucrare2.jpg",
+    "poze/lucrare4.jpg",
+    "poze/lucrare5.jpg"
+  ];
+
+  let index = 0;
+  const slider = document.getElementById("slider");
+
+  setInterval(() => {
+    index = (index + 1) % imagini.length;
+    slider.src = imagini[index];
+  }, 2000);
+</script>
 
 </body>
 </html><style>
@@ -235,6 +248,7 @@
   border-radius: 8px;
   margin-top: 15px;
 }
+
 
 
 
