@@ -40,6 +40,47 @@ body.fundal {
   font-size: 18px;
   color: #f1f1f1;
 }
+.preturi {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 40px 20px;
+  border-radius: 15px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.pret-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.pret-item:last-child {
+  border-bottom: none;
+}
+
+.pret-item h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.pret {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.verde { color: #2ecc71; }
+.albastru { color: #3498db; }
+.rosu { color: #e74c3c; }
+
+.preturi small {
+  display: block;
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 14px;
+}
 
   </style>
 </head>
@@ -91,6 +132,7 @@ body.fundal {
   max-width: 1100px;
 }
 .pret {
+
   color: #ffd700;
   font-weight: bold;
   font-size: 1.2em;
@@ -233,33 +275,24 @@ body.fundal {
 </section>
 
 <section class="preturi">
-  <h2>Listă de prețuri</h2>
-
-<div style="max-width:600px; border:1px solid #ddd; border-radius:8px; overflow:hidden;">
-  
-  <div style="padding:12px; border-bottom:1px solid #ddd;">
-    <strong>Excavări cu mini excavator</strong><br>
-   <span style="color:#16a34a; font-weight:bold;">150 lei / oră</span>
-
+  <div class="pret-item">
+    <h3>Excavări cu mini excavator</h3>
+    <span class="pret verde">150 lei / oră</span>
   </div>
 
-  <div style="padding:12px; border-bottom:1px solid #ddd;">
-    <strong>Fosă septică (2000–3500 kg)</strong><br>
-    <span style="color:#2563eb; font-weight:bold;">1500 lei</span>
-
+  <div class="pret-item">
+    <h3>Fosă septică (2000–3500 kg) – fără drenaj</h3>
+    <span class="pret albastru">1500 lei</span>
   </div>
 
-  <div style="padding:12px;">
-    <strong>Fosă septică (2000–3500 kg)</strong><br>
-    <span style="color:#dc2626; font-weight:bold;">2500 lei</span>
-
+  <div class="pret-item">
+    <h3>Fosă septică (2000–3500 kg) – cu drenaj</h3>
+    <span class="pret rosu">2500 lei</span>
   </div>
 
-</div>
+  <small>* Prețurile pot varia în funcție de lucrare și accesul la locație.</small>
+</section>
 
-<p style="margin-top:10px; font-size:14px;">
-* Prețurile pot varia în funcție de lucrare și accesul la locație.
-</p>
 
 </section>
 
@@ -330,6 +363,7 @@ body.fundal {
   border-radius: 8px;
   margin-top: 15px;
 }
+
 
 
 
