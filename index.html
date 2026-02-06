@@ -155,7 +155,13 @@
   <h2>Lucrări realizate</h2>
 
 <div style="max-width:400px; margin:auto;">
-  <img id="slider" src="poze/lucrare1.jpg" style="width:100%; border-radius:8px;">
+  <img id="slider" src="poze/lucrare1.jpg" style="
+  width:100%;
+  border-radius:8px;
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+">
+
 </div>
 
 </section>
@@ -222,6 +228,28 @@
     slider.src = imagini[index];
   }, 2000);
 </script>
+<script>
+  const imagini = [
+    "poze/lucrare1.jpg",
+    "poze/lucrare2.jpg",
+    "poze/lucrare4.jpg",
+    "poze/lucrare5.jpg"
+  ];
+
+  let index = 0;
+  const slider = document.getElementById("slider");
+
+  setInterval(() => {
+    slider.style.opacity = 0;
+
+    setTimeout(() => {
+      index = (index + 1) % imagini.length;
+      slider.src = imagini[index];
+      slider.style.opacity = 1;
+    }, 800);
+
+  }, 2000);
+</script>
 
 </body>
 </html><style>
@@ -248,6 +276,7 @@
   border-radius: 8px;
   margin-top: 15px;
 }
+
 
 
 
