@@ -5,334 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Mini Excavator Vaslui | Fose septice, fundații, șanțuri</title>
-
   <meta name="description" content="Prestări servicii mini excavator în Vaslui și împrejurimi. Executăm fose septice, fundații, șanțuri. Sună acum: 0771 460 698">
 
   <style>
-body.fundal {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-image: url("poze/fundal.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  color: #ffffff;
-}
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-image: url("poze/fundal.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #ffffff;
+    }
 
- .hero {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 60px 20px;
-  text-align: center;
-  border-radius: 16px;
-  max-width: 1000px;
-  margin: 40px auto;
-}
-
-.hero h1 {
-  font-size: 36px;
-  margin-bottom: 15px;
-  color: #ffffff;
-}
-
-.hero p {
-  font-size: 18px;
-  color: #f1f1f1;
-}
-.preturi {
-  background: transparent;
-  padding: 40px 25px;
-  border-radius: 16px;
-  max-width: 900px;
-  margin: 40px auto;
-}
-
-.pret-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-}
-
-.pret-item:last-child {
-  border-bottom: none;
-}
-
-.pret-item h3 {
-  margin: 0;
-  font-size: 20px;
-  color: #ffffff;
-}
-
-.pret {
-  font-size: 24px;
-  font-weight: bold;
-  color: #e74c3c; /* ROȘU */
-}
-
-.preturi small {
-  display: block;
-  margin-top: 15px;
-  color: #dddddd;
-  font-size: 14px;
-}
-/* === FIX FORTAT LISTA PRETURI === */
-section.preturi,
-.preturi,
-#preturi {
-  background: transparent !important;
-}
-
-/* daca section-ul parinte e alb */
-section {
-  background: transparent !important;
-}
-
-/* randurile */
-.pret-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.4);
-}
-
-/* text */
-.pret-item,
-.pret-item h3 {
-  color: #ffffff !important;
-  font-size: 20px;
-}
-
-/* PRET ROSU */
-.pret,
-.pret span {
-  color: #ff2b2b !important;
-  font-size: 26px;
-  font-weight: 700;
-}
-
-/* nota mica */
-.preturi small {
-  color: #eeeeee !important;
-}
-/* 1. asigură fluiditate pe mobil */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-/* 2. text și secțiuni adaptabile */
-h1, h2, p {
-  max-width: 100%;
-  padding: 0 15px;
-}
-
-h1 {
-  font-size: 28px;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-/* 3. imagini responsive */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* 4. butoane mari și ușor de apăsat */
-a.button, .buton {
-  display: block;
-  width: 80%;
-  margin: 15px auto;
-  padding: 15px;
-  text-align: center;
-  font-size: 18px;
-  background: #0077cc;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-/* 5. reguli pentru ecrane mici */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 24px;
-  }
-  p {
-    font-size: 16px;
-  }
-}
-
-
-  </style>
-</head>
- <style>
-<body class="fundal">
-
-
-  <style>..hero {
-  background: rgba(0, 0, 0, 0.45); /* transparent */
-  padding: 50px 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(4px); /* efect premium */
-}
-
-
-.hero h1 {
-  color: #ffffff;
-}
-
-.hero p {
-  color: #f1f1f1;
-}
-
-
-.hero h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-.hero p {
-  font-size: 18px;
-  margin-bottom: 20px;
-
-}
-.hero {
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-}
-
- 
-
+    section, header {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+    }
 
     header.hero {
-  background: rgba(0, 0, 0, 0.45); /* transparent */
-  backdrop-filter: blur(4px);     /* efect modern */
-  border-radius: 25px;
-}
+      text-align: center;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+    }
 
-    section {
-  background: rgba(0, 0, 0, 0.65);
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 1100px;
-}
-.pret {
-
-  color: #ffd700;
-  font-weight: bold;
-  font-size: 1.2em;
-}
+    h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
 
     h2 {
-      color: #2c3e50;
+      font-size: 26px;
+      margin-bottom: 15px;
     }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
     ul {
       line-height: 1.8;
+      padding-left: 20px;
     }
-    .preturi {
-      background: #ecf0f1;
-      padding: 15px;
-      border-radius: 6px;
-    }
-    .galerie {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
-    }
-    .galerie img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
+
+    img {
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.15);
     }
 
     .call-button {
       display: block;
-      width: 100%;
-      text-align: center;
-      background: #27ae60;
+      width: fit-content;
+      margin: 20px auto 0;
+      background: #22c55e;
       color: #fff;
-      padding: 15px;
-      font-size: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
       text-decoration: none;
       border-radius: 8px;
-      margin-top: 20px;
+      font-weight: bold;
     }
-    .call-button:hover {
-      background: #219150;
+
+    .preturi {
+      background: rgba(0, 0, 0, 0.65);
     }
+
+    .pret-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .pret-item:last-child {
+      border-bottom: none;
+    }
+
+    .pret-item h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .pret {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff2b2b;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 350px;
+      border: 0;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
-      color: #777;
+      color: #ddd;
     }
-.hero {
-  background: #ecf0f1;
-  padding: 50px 20px;
-  text-align: center;
-}
-.hero h1 {
-  font-size: 34px;
-  margin-bottom: 10px;
-}
-.hero p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
+
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .pret-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      section, header {
+        margin: 15px 10px;
+        padding: 20px 15px;
+      }
+    }
   </style>
- 
-
 </head>
-<body class="fundal">
-<section style="
-  background-image: url('poze/fundal.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 80px 20px;
-  color: white;
-  text-align: center;
-">
-  <h1 style="font-size:36px; margin-bottom:10px;">
-    Mini Excavator Vaslui
-  </h1>
 
-  <p style="font-size:18px; margin-bottom:20px;">
-    Fose septice • fundații • șanțuri • lucrări rapide și corecte
-  </p>
-
-  <a href="tel:0771460698" style="
-    display:inline-block;
-    padding:15px 30px;
-    background:#22c55e;
-    color:white;
-    font-size:18px;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-  ">
-    📞 Solicită ofertă
-  
-
-
-  </a>
-</section>
-
+<body>
 
 <header class="hero">
   <h1>Mini Excavator Vaslui – Disponibil Azi</h1>
   <p>Fose septice • Fundații • Șanțuri • Lucrări rapide și corecte</p>
   <a href="tel:0771460698" class="call-button">📞 Sună acum</a>
-</header>
-
 </header>
 
 <section>
@@ -344,6 +175,7 @@ a.button, .buton {
     <li>Lucrări cu mini excavator</li>
   </ul>
 </section>
+
 <section>
   <h2>Mini Excavator Vaslui – servicii profesionale</h2>
   <p>
@@ -356,20 +188,14 @@ a.button, .buton {
 
 <section>
   <h2>Lucrări realizate</h2>
-
-<div style="max-width:400px; margin:auto;">
-  <img id="slider" src="poze/lucrare1.jpg" style="
-  width:100%;
-  border-radius:8px;
-  transition: opacity 0.8s ease-in-out;
-  opacity: 1;
-">
-
-</div>
-
+  <div style="max-width:400px; margin:auto;">
+    <img id="slider" src="poze/lucrare1.jpg" alt="Lucrare mini excavator">
+  </div>
 </section>
 
 <section class="preturi">
+  <h2>Prețuri</h2>
+
   <div class="pret-item">
     <h3>Excavări cu mini excavator</h3>
     <span class="pret">150 lei / oră</span>
@@ -388,28 +214,24 @@ a.button, .buton {
   <small>* Prețurile pot varia în funcție de lucrare și accesul la locație.</small>
 </section>
 
-
-
-</section>
-
 <section>
   <h2>Contact</h2>
   <p>Pentru detalii și programări, sunați-ne direct:</p>
-  <a class="call-button" href="tel:0771460698">📞 Sună acum: 0771 460 698</a>
-</section><p><strong>Telefon:</strong> 0771 460 698</p>
+  <a class="call-button" href="tel:0771460698">📞 0771 460 698</a>
+</section>
 
-<h3>Zona de lucru</h3>
-
-<div class="map">
-  <<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d36855.51373695206!2d27.682290092988712!3d46.64054135137226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sro!4v1770402271904!5m2!1sfr!2sro" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>>
-</div>
+<section>
+  <h2>Zona de lucru</h2>
+  <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d36855.51373695206!2d27.682290092988712!3d46.64054135137226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sro!4v1770402271904!5m2!1sfr!2sro" loading="lazy"></iframe>
+  </div>
+</section>
 
 <footer>
   <p>© 2026 MiniExcavator Vaslui | Toate drepturile rezervate</p>
 </footer>
-<a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank">
-  WhatsApp
-</a>
+
+<a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank">WhatsApp</a>
 
 <script>
   const imagini = [
@@ -424,108 +246,13 @@ a.button, .buton {
 
   setInterval(() => {
     slider.style.opacity = 0;
-
     setTimeout(() => {
       index = (index + 1) % imagini.length;
       slider.src = imagini[index];
       slider.style.opacity = 1;
-    }, 800);
-
-  }, 4000);
+    }, 600);
+  }, 3500);
 </script>
 
 </body>
-</html><style>
-.whatsapp-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 50px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 999;
-}
-.whatsapp-button:hover {
-  background: #1ebe5d;
-}
-.map iframe {
-  width: 100%;
-  height: 350px;
-  border: 0;
-  border-radius: 8px;
-  margin-top: 15px;
-}
-@media (max-width: 768px) {
-
-  body {
-    overflow-x: hidden;
-  }
-
-  .container {
-    width: 100%;
-    padding: 15px;
-  }
-
-  /* coloane -> rânduri */
-  .row {
-    flex-direction: column;
-  }
-
-  /* text mai lizibil */
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  p {
-    font-size: 16px;
-  }
-
-  /* imagini */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
