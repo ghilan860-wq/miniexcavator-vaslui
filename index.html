@@ -117,6 +117,58 @@ section {
 .preturi small {
   color: #eeeeee !important;
 }
+/* 1. asigură fluiditate pe mobil */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* 2. text și secțiuni adaptabile */
+h1, h2, p {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* 3. imagini responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 4. butoane mari și ușor de apăsat */
+a.button, .buton {
+  display: block;
+  width: 80%;
+  margin: 15px auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  background: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* 5. reguli pentru ecrane mici */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
 
 
   </style>
@@ -443,6 +495,7 @@ section {
   }
 
 }
+
 
 
 
