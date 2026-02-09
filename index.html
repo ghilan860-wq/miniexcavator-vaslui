@@ -1,17 +1,53 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Mini Excavator Vaslui | Fose septice, fundații, șanțuri</title>
-  <meta name="description" content="Prestări servicii mini excavator în Vaslui și împrejurimi. Executăm fose septice, fundații, șanțuri. Sună acum: 0771 460 698">
+  <meta name="description" content="Prestări servicii mini excavator în Vaslui și împrejurimi. Executăm fose septice, fundații, șanțuri. Sună acum: 0771 460 698" />
+
+  <!-- Preload imagini importante (schimbă în .webp dacă le convertești) -->
+  <link rel="preload" as="image" href="poze/fundal.jpg" />
+  <link rel="preload" as="image" href="poze/lucrare1.jpg" />
+
+  <!-- SEO Local: Schema.org (completează adresa dacă vrei) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Mini Excavator Vaslui",
+    "telephone": "+40771460698",
+    "areaServed": ["Vaslui", "Județul Vaslui"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vaslui",
+      "addressRegion": "VS",
+      "addressCountry": "RO"
+    },
+    "url": "",
+    "sameAs": [],
+    "description": "Servicii mini excavator în Vaslui și împrejurimi: fose septice, fundații, șanțuri pentru utilități."
+  }
+  </script>
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root{
+      --bg: rgba(0, 0, 0, 0.62);
+      --bg2: rgba(0, 0, 0, 0.68);
+      --card: rgba(0, 0, 0, 0.55);
+      --text: #ffffff;
+      --muted: #e5e7eb;
+      --green: #22c55e;
+      --green2:#16a34a;
+      --red: #ff2b2b;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1100px;
     }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -19,94 +55,149 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      color: #ffffff;
+      color: var(--text);
+    }
+
+    /* Fallback dacă nu există blur */
+    header.hero{
+      background: var(--card);
+    }
+    @supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
+      header.hero{
+        background: rgba(0,0,0,.52);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+      }
     }
 
     section, header {
-      max-width: 1100px;
+      max-width: var(--max);
       margin: 30px auto;
       padding: 30px 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 16px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
     header.hero {
       text-align: center;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(4px);
     }
 
-    h1 {
-      font-size: 34px;
-      margin-bottom: 10px;
+    .top-nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin: 0 0 14px;
+      font-size: 15px;
     }
-
-    h2 {
-      font-size: 26px;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    ul {
-      line-height: 1.8;
-      padding-left: 20px;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .call-button {
-      display: block;
-      width: fit-content;
-      margin: 20px auto 0;
-      background: #22c55e;
-      color: #fff;
-      padding: 15px 30px;
-      font-size: 18px;
+    .top-nav a{
+      color: var(--muted);
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+      border-bottom: 1px solid rgba(255,255,255,.25);
+      padding-bottom: 2px;
+    }
+    .top-nav a:hover{ color:#fff; border-bottom-color:#fff; }
+
+    h1 { font-size: 34px; margin: 0 0 10px; }
+    h2 { font-size: 26px; margin: 0 0 15px; }
+    p { font-size: 18px; line-height: 1.6; margin: 0 0 12px; }
+    ul { line-height: 1.8; padding-left: 20px; margin: 0; }
+
+    img { max-width: 100%; height: auto; border-radius: 10px; }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 18px;
     }
 
-    .preturi {
-      background: rgba(0, 0, 0, 0.65);
+    .btn {
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 18px;
+      border: 0;
+      cursor: pointer;
+      transition: transform .08s ease, background .12s ease, box-shadow .12s ease;
+      outline: none;
+    }
+    .btn:focus-visible{
+      box-shadow: 0 0 0 3px rgba(34,197,94,.35);
+    }
+    .btn-primary{
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-primary:hover{ background: var(--green2); transform: translateY(-1px); }
+    .btn-ghost{
+      background: rgba(255,255,255,.12);
+      color:#fff;
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,.18); transform: translateY(-1px); }
+
+    .badges{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .badge{
+      background: rgba(255,255,255,.10);
+      padding: 8px 12px;
+      border-radius: 999px;
     }
 
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .card{
+      background: rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .preturi { background: var(--bg2); }
     .pret-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      gap: 12px;
     }
+    .pret-item:last-child { border-bottom: none; }
+    .pret-item h3 { margin: 0; font-size: 20px; }
+    .pret { font-size: 24px; font-weight: 900; color: var(--red); }
+    small{ color: var(--muted); display:block; margin-top: 12px; }
 
-    .pret-item:last-child {
-      border-bottom: none;
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
     }
-
-    .pret-item h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .pret {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ff2b2b;
-    }
+    .gallery img{ border-radius: 10px; }
 
     .map iframe {
       width: 100%;
       height: 350px;
       border: 0;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-top: 15px;
     }
 
@@ -116,64 +207,111 @@
       color: #ddd;
     }
 
+    /* WhatsApp floating */
     .whatsapp-button {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: #25D366;
       color: white;
-      padding: 14px 20px;
-      border-radius: 50px;
-      font-weight: bold;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 900;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
       z-index: 999;
     }
+    .whatsapp-button:focus-visible{ outline: 3px solid rgba(37,211,102,.45); }
+
+    /* Sticky bottom bar (mobil) */
+    .sticky-bar{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display:none;
+      gap:10px;
+      padding: 10px;
+      background: rgba(0,0,0,.78);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .sticky-bar a{ flex: 1; text-align:center; }
 
     /* RESPONSIVE */
+    @media (max-width: 900px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-      h1 {
-        font-size: 24px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      p {
-        font-size: 16px;
-      }
-
-      .pret-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-
-      section, header {
-        margin: 15px 10px;
-        padding: 20px 15px;
-      }
+      h1 { font-size: 24px; }
+      h2 { font-size: 20px; }
+      p  { font-size: 16px; }
+      .pret-item { flex-direction: column; align-items: flex-start; }
+      section, header { margin: 15px 10px; padding: 20px 15px; }
+      .sticky-bar{ display:flex; }
+      body{ padding-bottom: 68px; } /* spațiu pentru sticky bar */
     }
   </style>
 </head>
 
 <body>
 
-<header class="hero">
+<header class="hero" id="top">
+  <nav class="top-nav" aria-label="Navigație">
+    <a href="#servicii">Servicii</a>
+    <a href="#preturi">Prețuri</a>
+    <a href="#lucrari">Lucrări</a>
+    <a href="#recenzii">Recenzii</a>
+    <a href="#contact">Contact</a>
+    <a href="#zona">Zona</a>
+  </nav>
+
   <h1>Mini Excavator Vaslui – Disponibil Azi</h1>
   <p>Fose septice • Fundații • Șanțuri • Lucrări rapide și corecte</p>
-  <a href="tel:0771460698" class="call-button">📞 Sună acum</a>
+
+  <div class="badges">
+    <span class="badge">📍 Vaslui & împrejurimi</span>
+    <span class="badge">⏱ Răspundem rapid la telefon/WhatsApp</span>
+    <span class="badge">💬 Ofertă pe loc (în funcție de lucrare)</span>
+  </div>
+
+  <div class="cta-row">
+    <a href="tel:0771460698" class="btn btn-primary" aria-label="Sună acum la 0771 460 698">📞 Sună acum</a>
+    <a href="https://wa.me/40771460698" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="Scrie pe WhatsApp">WhatsApp</a>
+  </div>
 </header>
 
-<section>
+<section id="servicii">
   <h2>Serviciile noastre</h2>
-  <ul>
-    <li>Execuție fose septice</li>
-    <li>Fundații</li>
-    <li>Șanțuri pentru utilități</li>
-    <li>Lucrări cu mini excavator</li>
-  </ul>
+
+  <div class="grid-2">
+    <div class="card">
+      <ul>
+        <li><strong>Execuție fose septice</strong> (cu / fără drenaj)</li>
+        <li><strong>Fundații</strong> pentru construcții</li>
+        <li><strong>Șanțuri pentru utilități</strong> (apă, canal, cabluri)</li>
+        <li><strong>Lucrări cu mini excavator</strong> diverse</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 10px;">De ce noi</h3>
+      <ul>
+        <li>Lucrăm <strong>rapid</strong> și <strong>curat</strong></li>
+        <li>Preț <strong>corect</strong> + estimare înainte</li>
+        <li>Ne adaptăm accesului din curte/teren</li>
+        <li>Programări flexibile</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a href="tel:0771460698" class="btn btn-primary">📞 Cere ofertă</a>
+    <a href="#preturi" class="btn btn-ghost">Vezi prețuri</a>
+  </div>
 </section>
 
 <section>
@@ -184,16 +322,29 @@
     șanțuri pentru utilități și alte lucrări de săpătură.
     Lucrăm rapid, curat și la preț corect.
   </p>
+  <p style="color:var(--muted); margin-top:10px;">
+    Program orientativ: <strong>Luni–Sâmbătă 08:00–19:00</strong>. (Sună pentru confirmare.)
+  </p>
 </section>
 
-<section>
+<section id="lucrari">
   <h2>Lucrări realizate</h2>
-  <div style="max-width:400px; margin:auto;">
-    <img id="slider" src="poze/lucrare1.jpg" alt="Lucrare mini excavator">
+
+  <div style="max-width:420px; margin:auto;">
+    <img id="slider" src="poze/lucrare1.jpg" alt="Lucrare mini excavator în Vaslui" loading="eager">
   </div>
+
+  <div class="gallery" aria-label="Galerie lucrări">
+    <img src="poze/lucrare1.jpg" alt="Lucrare 1 mini excavator" loading="lazy">
+    <img src="poze/lucrare2.jpg" alt="Lucrare 2 mini excavator" loading="lazy">
+    <img src="poze/lucrare4.jpg" alt="Lucrare 3 mini excavator" loading="lazy">
+    <img src="poze/lucrare5.jpg" alt="Lucrare 4 mini excavator" loading="lazy">
+  </div>
+
+  <small>Tip: dacă vrei să crești pe Google, poți face pagini separate pentru fiecare serviciu (fosa-septica.html, santuri.html, fundatii.html).</small>
 </section>
 
-<section class="preturi">
+<section class="preturi" id="preturi">
   <h2>Prețuri</h2>
 
   <div class="pret-item">
@@ -212,18 +363,49 @@
   </div>
 
   <small>* Prețurile pot varia în funcție de lucrare și accesul la locație.</small>
+
+  <div class="cta-row">
+    <a href="tel:0771460698" class="btn btn-primary">📞 Confirmă un preț</a>
+    <a href="https://wa.me/40771460698" class="btn btn-ghost" target="_blank" rel="noopener">💬 Cere ofertă pe WhatsApp</a>
+  </div>
 </section>
 
-<section>
+<section id="recenzii">
+  <h2>Ce spun clienții</h2>
+  <div class="grid-2">
+    <div class="card">
+      <p style="margin:0;"><strong>„Rapid și curat, a ieșit șanțul perfect.”</strong></p>
+      <p style="margin:8px 0 0; color:var(--muted);">— Client, Vaslui</p>
+    </div>
+    <div class="card">
+      <p style="margin:0;"><strong>„Preț corect, comunicare bună, recomand.”</strong></p>
+      <p style="margin:8px 0 0; color:var(--muted);">— Client, împrejurimi</p>
+    </div>
+  </div>
+  <small>Dacă ai link de Google Business Profile, îl punem aici pentru recenzii reale + buton „Lasă o recenzie”.</small>
+</section>
+
+<section id="contact">
   <h2>Contact</h2>
-  <p>Pentru detalii și programări, sunați-ne direct:</p>
-  <a class="call-button" href="tel:0771460698">📞 0771 460 698</a>
+  <p>Pentru detalii și programări:</p>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="tel:0771460698" aria-label="Sună la 0771 460 698">📞 0771 460 698</a>
+    <a class="btn btn-ghost" href="https://wa.me/40771460698" target="_blank" rel="noopener" aria-label="WhatsApp 0771 460 698">WhatsApp</a>
+  </div>
+
+  <small>Răspuns rapid în timpul programului. Dacă nu răspundem, revenim.</small>
 </section>
 
-<section>
+<section id="zona">
   <h2>Zona de lucru</h2>
+  <p style="color:var(--muted); margin-bottom:10px;">Vaslui + localități din apropiere.</p>
   <div class="map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d36855.51373695206!2d27.682290092988712!3d46.64054135137226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sro!4v1770402271904!5m2!1sfr!2sro" loading="lazy"></iframe>
+    <iframe
+      title="Hartă zona de lucru Vaslui"
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d36855.51373695206!2d27.682290092988712!3d46.64054135137226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sro!4v1770402271904!5m2!1sfr!2sro"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
@@ -231,9 +413,16 @@
   <p>© 2026 MiniExcavator Vaslui | Toate drepturile rezervate</p>
 </footer>
 
-<a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank">WhatsApp</a>
+<!-- Sticky bar (mobil) -->
+<div class="sticky-bar" role="navigation" aria-label="Acțiuni rapide">
+  <a href="tel:0771460698" class="btn btn-primary" aria-label="Sună acum">📞 Sună</a>
+  <a href="https://wa.me/40771460698" class="btn btn-ghost" target="_blank" rel="noopener" aria-label="Scrie pe WhatsApp">WhatsApp</a>
+</div>
+
+<a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank" rel="noopener" aria-label="Contact WhatsApp">WhatsApp</a>
 
 <script>
+  // Slider + prefetch următoarea imagine (mai smooth)
   const imagini = [
     "poze/lucrare1.jpg",
     "poze/lucrare2.jpg",
@@ -244,14 +433,24 @@
   let index = 0;
   const slider = document.getElementById("slider");
 
+  function prefetchNext(nextSrc){
+    const img = new Image();
+    img.src = nextSrc;
+  }
+
+  // Prefetch inițial
+  prefetchNext(imagini[1]);
+
   setInterval(() => {
     slider.style.opacity = 0;
     setTimeout(() => {
       index = (index + 1) % imagini.length;
       slider.src = imagini[index];
+      const next = imagini[(index + 1) % imagini.length];
+      prefetchNext(next);
       slider.style.opacity = 1;
-    }, 600);
-  }, 3500);
+    }, 450);
+  }, 3200);
 </script>
 
 </body>
