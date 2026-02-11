@@ -244,7 +244,6 @@
       display: flex;
       flex-direction: column;
 
-      /* important: să nu fie tăiat pe mobil */
       max-height: calc(100dvh - (2 * clamp(12px, 3vw, 18px)) - env(safe-area-inset-bottom));
     }
 
@@ -276,7 +275,7 @@
 
     .modal-body{
       padding: 16px;
-      overflow: auto;                 /* important */
+      overflow: auto;
       -webkit-overflow-scrolling: touch;
       flex: 1 1 auto;
     }
@@ -312,7 +311,6 @@
       justify-content: flex-end;
       margin-top: 14px;
 
-      /* important: rămâne vizibil în scroll */
       position: sticky;
       bottom: 0;
       background: rgba(0,0,0,.82);
@@ -343,19 +341,16 @@
       section, header { margin: 15px 10px; padding: 20px 15px; }
       .sticky-bar{ display:flex; }
 
-      /* spațiu pentru sticky bar */
       body{ padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
 
       .form-grid{ grid-template-columns: 1fr; }
 
-      /* WhatsApp să nu fie peste bara sticky */
       .whatsapp-button{
         right: 14px;
         bottom: calc(86px + env(safe-area-inset-bottom));
         padding: 12px 16px;
       }
 
-      /* butoane pe o coloană pe ecrane înguste */
       .form-actions{
         justify-content: stretch;
       }
@@ -522,7 +517,6 @@
   <p>© 2026 MiniExcavator Vaslui | Toate drepturile rezervate</p>
 </footer>
 
-<!-- Sticky bar (mobil) -->
 <div class="sticky-bar" role="navigation" aria-label="Acțiuni rapide">
   <a href="tel:0771460698" class="btn btn-primary" aria-label="Sună acum">📞 Sună</a>
   <button type="button" class="btn btn-ghost" id="openOfferSticky" aria-label="Cere ofertă prin formular">🧾 Ofertă</button>
@@ -530,7 +524,6 @@
 
 <a href="https://wa.me/40771460698" class="whatsapp-button" target="_blank" rel="noopener" aria-label="Contact WhatsApp">WhatsApp</a>
 
-<!-- ====== MODAL: CERERE OFERTĂ ====== -->
 <div class="modal-backdrop" id="offerModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="offerTitle">
     <div class="modal-header">
@@ -608,6 +601,18 @@
 </div>
 
 <script>
+  // ====== DOM refs ======
+  const modal = document.getElementById("offerModal");
+  const closeBtn = document.getElementById("closeOffer");
+  const form = document.getElementById("offerForm");
+  const statusBox = document.getElementById("offerStatus");
+  const submitBtn = document.getElementById("submitOffer");
+  const pageUrl = document.getElementById("pageUrl");
+  const ts = document.getElementById("ts");
+
+  // ====== Endpoint Apps Script ======
+  const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzHpf6xGOg5qcWRp377kPaBuI6pOSf50To-FD-0DqphAu0b13eaROhJ3tMZc3kJMWziQQ/exec";
+
   // ====== Slider ======
   const imagini = ["poze/lucrare1.jpg","poze/lucrare2.jpg","poze/lucrare4.jpg","poze/lucrare5.jpg"];
   let index = 0;
@@ -617,7 +622,6 @@
     const img = new Image();
     img.src = nextSrc;
   }
-
 
   if (slider) {
     prefetchNext(imagini[1]);
@@ -632,10 +636,7 @@
     }, 3200);
   }
 
-  // ====== OFFER MODAL + SUBMIT ======
-  const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzHpf6xGOg5qcWRp377kPaBuI6pOSf50To-FD-0DqphAu0b13eaROhJ3tMZc3kJMWziQQ/exec";
-
-
+  // ====== Modal open/close ======
   function openModal() {
     if (!modal) return;
     modal.classList.add("show");
@@ -656,10 +657,12 @@
     if (!modal) return;
     modal.classList.remove("show");
     modal.setAttribute("aria-hidden", "true");
+
     if (statusBox) {
       statusBox.className = "status";
       statusBox.textContent = "";
     }
+
     document.body.style.overflow = "";
   }
 
@@ -680,6 +683,7 @@
     if (e.key === "Escape" && modal && modal.classList.contains("show")) closeModal();
   });
 
+  // ====== WhatsApp fallback ======
   function toWhatsAppLink(payload) {
     const lines = [
       "Cerere ofertă - Mini Excavator Vaslui",
@@ -706,57 +710,45 @@
     });
   }
 
+  // ====== Submit to Google Sheets ======
   if (form) {
-    const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzHpf6xGOg5qcWRp377kPaBuI6pOSf50To-FD-0DqphAu0b13eaROhJ3tMZc3kJMWziQQ/exec";
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+      if (!submitBtn || !statusBox) return;
 
-  submitBtn.disabled = true;
-  statusBox.className = "status";
-  statusBox.textContent = "Se trimite...";
+      submitBtn.disabled = true;
+      statusBox.className = "status";
+      statusBox.textContent = "Se trimite...";
 
-  try {
-    const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
+      try {
+        const fd = new FormData(form);
+        const payload = Object.fromEntries(fd.entries());
 
-    const res = await fetch(ENDPOINT_URL, {
-      method: "POST",
-      body: new URLSearchParams(payload)
+        const res = await fetch(ENDPOINT_URL, {
+          method: "POST",
+          body: new URLSearchParams(payload)
+        });
+
+        const result = await res.json();
+
+        if (result.status === "ok") {
+          statusBox.className = "status ok";
+          statusBox.textContent = "Cererea a fost trimisă.";
+          form.reset();
+          setTimeout(closeModal, 1200);
+        } else {
+          throw new Error(result.message || "Server error");
+        }
+      } catch (err) {
+        statusBox.className = "status err";
+        statusBox.textContent = "Eroare la trimitere.";
+      } finally {
+        submitBtn.disabled = false;
+      }
     });
-
-    const result = await res.json();
-
-    if (result.status === "ok") {
-      statusBox.className = "status ok";
-      statusBox.textContent = "Cererea a fost trimisă.";
-      form.reset();
-      setTimeout(closeModal, 1200);
-    } else {
-      throw new Error(result.message || "Server error");
-    }
-
-  } catch (err) {
-    statusBox.className = "status err";
-    statusBox.textContent = "Eroare la trimitere.";
-  } finally {
-    submitBtn.disabled = false;
   }
-});
-  }
-  
-  const modal = document.getElementById("offerModal");
-  const closeBtn = document.getElementById("closeOffer");
-  const form = document.getElementById("offerForm");
-  const statusBox = document.getElementById("offerStatus");
-  const submitBtn = document.getElementById("submitOffer");
-  const pageUrl = document.getElementById("pageUrl");
-  const ts = document.getElementById("ts");
 </script>
 
 </body>
 </html>
-
-
-
-
