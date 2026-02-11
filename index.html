@@ -707,57 +707,42 @@
   }
 
   if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzHpf6xGOg5qcWRp377kPaBuI6pOSf50To-FD-0DqphAu0b13eaROhJ3tMZc3kJMWziQQ/exec";
 
-      if (statusBox) {
-        statusBox.className = "status";
-        statusBox.textContent = "";
-      }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-      if (!ENDPOINT_URL || ENDPOINT_URL.includes("PASTE_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        if (statusBox) {
-          statusBox.className = "status err";
-          statusBox.textContent = "Endpoint neconfigurat. Folosește butonul „Trimite pe WhatsApp”.";
-        }
-        return;
-      }
+  submitBtn.disabled = true;
+  statusBox.className = "status";
+  statusBox.textContent = "Se trimite...";
 
-      const payload = Object.fromEntries(new FormData(form).entries());
-      const body = new URLSearchParams(payload);
+  try {
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
 
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Se trimite...";
-      }
-
-      try {
-        await fetch(ENDPOINT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          body
-        });
-
-        if (statusBox) {
-          statusBox.className = "status ok";
-          statusBox.textContent = "Cererea a fost trimisă. Vei fi contactat(ă) la telefon/WhatsApp.";
-        }
-
-        form.reset();
-        setTimeout(closeModal, 1200);
-      } catch (err) {
-        if (statusBox) {
-          statusBox.className = "status err";
-          statusBox.textContent = "Eroare la trimitere. Folosește „Trimite pe WhatsApp”.";
-        }
-        console.error(err);
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Trimite cererea";
-        }
-      }
+    const res = await fetch(ENDPOINT_URL, {
+      method: "POST",
+      body: new URLSearchParams(payload)
     });
+
+    const result = await res.json();
+
+    if (result.status === "ok") {
+      statusBox.className = "status ok";
+      statusBox.textContent = "Cererea a fost trimisă.";
+      form.reset();
+      setTimeout(closeModal, 1200);
+    } else {
+      throw new Error(result.message || "Server error");
+    }
+
+  } catch (err) {
+    statusBox.className = "status err";
+    statusBox.textContent = "Eroare la trimitere.";
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
   }
   
   const modal = document.getElementById("offerModal");
@@ -771,6 +756,7 @@
 
 </body>
 </html>
+
 
 
 
