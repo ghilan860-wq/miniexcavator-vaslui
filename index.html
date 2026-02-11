@@ -634,13 +634,6 @@
   // ====== OFFER MODAL + SUBMIT ======
   const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzRmfbasRtTFmDJuC3EMUVSJUZhILW7H7n73fw-cp1u0GgApUCAQbtdvsJkzn0tXlQbzw/exec";
 
-  const modal = document.getElementById("offerModal");
-  const closeBtn = document.getElementById("closeOffer");
-  const form = document.getElementById("offerForm");
-  const statusBox = document.getElementById("offerStatus");
-  const submitBtn = document.getElementById("submitOffer");
-  const pageUrl = document.getElementById("pageUrl");
-  const ts = document.getElementById("ts");
 
   function openModal() {
     if (!modal) return;
@@ -765,7 +758,16 @@
       }
     });
   }
+  
+  const modal = document.getElementById("offerModal");
+  const closeBtn = document.getElementById("closeOffer");
+  const form = document.getElementById("offerForm");
+  const statusBox = document.getElementById("offerStatus");
+  const submitBtn = document.getElementById("submitOffer");
+  const pageUrl = document.getElementById("pageUrl");
+  const ts = document.getElementById("ts");
 </script>
 
 </body>
 </html>
+
