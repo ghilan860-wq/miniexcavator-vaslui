@@ -1391,28 +1391,21 @@
     }
 
     const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
+const payload = Object.fromEntries(fd.entries());
+const body = new URLSearchParams(payload);
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Se trimite...";
+await fetch(ENDPOINT_URL, {
+  method: "POST",
+  mode: "no-cors",
+  body
+});
 
-    try{
-      const res = await fetch(ENDPOINT_URL, {
-        method: "POST",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+statusBox.className = "status ok";
+statusBox.textContent = "Cererea a fost trimisă. Vei fi contactat(ă) la telefon/WhatsApp.";
+form.reset();
+setTimeout(closeModal, 1200);
+return;
 
-      // Apps Script poate răspunde 200 cu text; tratăm simplu
-      if(!res.ok) throw new Error("HTTP " + res.status);
-
-      statusBox.className = "status ok";
-      statusBox.textContent = "Cererea a fost trimisă. Vei fi contactat(ă) la telefon/WhatsApp.";
-      form.reset();
-
-      // închide după 1.2s
-      setTimeout(closeModal, 1200);
 
     }catch(err){
       statusBox.className = "status err";
@@ -1428,5 +1421,6 @@
 
 </body>
 </html>
+
 
 
