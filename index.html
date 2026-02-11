@@ -580,54 +580,170 @@
   ];
   let index = 0;
   const slider = document.getElementById("slider");
-  function prefetchNext(nextSrc){
+
+  function prefetchNext(nextSrc) {
     const img = new Image();
     img.src = nextSrc;
   }
-  prefetchNext(imagini[1]);
-  setInterval(() => {
-    slider.style.opacity = 0;
-    setTimeout(() => {
-      index = (index + 1) % imagini.length;
-      slider.src = imagini[index];
-      const next = imagini[(index + 1) % imagini.length];
-      prefetchNext(next);
-      slider.style.opacity = 1;
-    }, 450);
-  }, 3200);
+
+  if (slider) {
+    prefetchNext(imagini[1]);
+    setInterval(() => {
+      slider.style.opacity = 0;
+      setTimeout(() => {
+        index = (index + 1) % imagini.length;
+        slider.src = imagini[index];
+        prefetchNext(imagini[(index + 1) % imagini.length]);
+        slider.style.opacity = 1;
+      }, 450);
+    }, 3200);
+  }
 
   // ====== MVP OFFER MODAL + SUBMIT TO GOOGLE SHEETS (APPS SCRIPT) ======
-  // 1) După deploy Apps Script, pune aici URL-ul Web App (se termină de obicei în /exec)
-  const ENDPOINT_URL = "<https://script.google.com/macros/s/AKfycbyVNVotaeW1ypfPOUmN8nkwUTOSVwDM6UWj0L6N8msrbGh5TR5JdPOF_3XrjjrLOmVLCA/exec>
-<html lang="ro">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  // URL Web App Apps Script (trebuie să fie /exec)
+  const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbyVNVotaeW1ypfPOUmN8nkwUTOSVwDM6UWj0L6N8msrbGh5TR5JdPOF_3XrjjrLOmVLCA/exec";
 
-  <title>Mini Excavator Vaslui | Fose septice, fundații, șanțuri</title>
-  <meta name="description" content="Prestări servicii mini excavator în Vaslui și împrejurimi. Executăm fose septice, fundații, șanțuri. Sună acum: 0771 460 698" />
+  const modal = document.getElementById("offerModal");
+  const closeBtn = document.getElementById("closeOffer");
+  const form = document.getElementById("offerForm");
+  const statusBox = document.getElementById("offerStatus");
+  const submitBtn = document.getElementById("submitOffer");
+  const pageUrl = document.getElementById("pageUrl");
+  const ts = document.getElementById("ts");
 
-  <link rel="preload" as="image" href="poze/fundal.jpg" />
-  <link rel="preload" as="image" href="poze/lucrare1.jpg" />
+  function openModal() {
+    if (!modal) return;
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Mini Excavator Vaslui",
-    "telephone": "+40771460698",
-    "areaServed": ["Vaslui", "Județul Vaslui"],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vaslui",
-      "addressRegion": "VS",
-      "addressCountry": "RO"
-    },
-    "url": "",
-    "sameAs": [],
-    "description": "Servicii mini excavator în Vaslui și împrejurimi: fose septice, fundații, șanțuri pentru utilități."
+    if (pageUrl) pageUrl.value = window.location.href;
+    if (ts) ts.value = new Date().toISOString();
+
+    setTimeout(() => {
+      const tel = document.getElementById("telefon");
+      if (tel) tel.focus();
+    }, 50);
+
+    document.body.style.overflow = "hidden";
   }
-  </script>
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    if (statusBox) {
+      statusBox.className = "status";
+      statusBox.textContent = "";
+    }
+    document.body.style.overflow = "";
+  }
+
+  // Buttons that open modal
+  [
+    "openOfferTop",
+    "openOfferServices",
+    "openOfferPrices",
+    "openOfferContact",
+    "openOfferSticky"
+  ].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", openModal);
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.classList.contains("show")) closeModal();
+  });
+
+  function toWhatsAppLink(payload) {
+    const lines = [
+      "Cerere ofertă - Mini Excavator Vaslui",
+      payload.serviciu ? "Serviciu: " + payload.serviciu : "",
+      payload.localitate ? "Localitate: " + payload.localitate : "",
+      payload.nume ? "Nume: " + payload.nume : "",
+      payload.telefon ? "Telefon: " + payload.telefon : "",
+      (payload.lungime || payload.latime || payload.adancime)
+        ? `Dimensiuni: ${payload.lungime || "-"}m x ${payload.latime || "-"}m x ${payload.adancime || "-"}m`
+        : "",
+      payload.cand ? "Când: " + payload.cand : "",
+      payload.detalii ? "Detalii: " + payload.detalii : "",
+      payload.pageUrl ? "Link: " + payload.pageUrl : ""
+    ].filter(Boolean).join("\n");
+
+    return "https://wa.me/40771460698?text=" + encodeURIComponent(lines);
+  }
+
+  const waBtn = document.getElementById("sendWhatsFallback");
+  if (waBtn && form) {
+    waBtn.addEventListener("click", () => {
+      const data = Object.fromEntries(new FormData(form).entries());
+      window.open(toWhatsAppLink(data), "_blank", "noopener");
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (statusBox) {
+        statusBox.className = "status";
+        statusBox.textContent = "";
+      }
+
+      // Dacă endpoint lipsește, folosește fallback WhatsApp
+      if (!ENDPOINT_URL || ENDPOINT_URL.includes("PASTE_APPS_SCRIPT_WEBAPP_URL_HERE")) {
+        if (statusBox) {
+          statusBox.className = "status err";
+          statusBox.textContent = "Endpoint neconfigurat. Folosește butonul „Trimite pe WhatsApp”.";
+        }
+        return;
+      }
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const body = new URLSearchParams(payload);
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Se trimite...";
+      }
+
+      try {
+        // Notă: cu mode:"no-cors" nu poți citi răspunsul. Asta e normal.
+        await fetch(ENDPOINT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body
+        });
+
+        if (statusBox) {
+          statusBox.className = "status ok";
+          statusBox.textContent = "Cererea a fost trimisă. Vei fi contactat(ă) la telefon/WhatsApp.";
+        }
+
+        form.reset();
+        setTimeout(closeModal, 1200);
+      } catch (err) {
+        if (statusBox) {
+          statusBox.className = "status err";
+          statusBox.textContent = "Eroare la trimitere. Folosește „Trimite pe WhatsApp”.";
+        }
+        console.error(err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Trimite cererea";
+        }
+      }
+    });
+  }
+</script>
 
   <style>
     :root{
@@ -1421,6 +1537,7 @@ return;
 
 </body>
 </html>
+
 
 
 
