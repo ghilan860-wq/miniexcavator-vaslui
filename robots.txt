@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ghilan860-wq.github.io/miniexcavator-vaslui/sitemap.xml
